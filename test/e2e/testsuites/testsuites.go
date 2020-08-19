@@ -635,6 +635,7 @@ func (t *TestStatefulset) DeletePodAndWait() {
 		}
 		return
 	}
+	time.Sleep(30 * time.Second)
 }
 
 func (t *TestStatefulset) Cleanup() {

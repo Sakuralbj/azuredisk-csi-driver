@@ -177,7 +177,6 @@ func (pod *PodDetails) SetupStatefulset(client clientset.Interface, namespace *v
 		storageClassName = tpvc.storageClass.Name
 	}
 	tpvc.requestedPersistentVolumeClaim = generateStatefulSetPVC(tpvc.namespace.Name, storageClassName, tpvc.claimSize, tpvc.volumeMode, tpvc.dataSource)
-	//cleanupFuncs = append(cleanupFuncs, tpvc.Cleanup)
 	ginkgo.By("setting up the statefulset")
 	tStatefulset := NewTestStatefulset(client, namespace, pod.Cmd, tpvc.requestedPersistentVolumeClaim, "pvc", fmt.Sprintf("%s%d", volume.VolumeMount.MountPathGenerate, 1), volume.VolumeMount.ReadOnly, pod.IsWindows)
 
