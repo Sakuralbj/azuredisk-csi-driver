@@ -618,7 +618,6 @@ func (t *TestStatefulset) WaitForPodReady() {
 	pod := statefulSetPods.Items[0]
 	t.podName = pod.Name
 	err = e2epod.WaitForPodRunningInNamespace(t.client, &pod)
-	time.Sleep(40 * time.Second)
 	framework.ExpectNoError(err)
 }
 
@@ -636,7 +635,6 @@ func (t *TestStatefulset) DeletePodAndWait() {
 		}
 		return
 	}
-	time.Sleep(40 * time.Second)
 }
 
 func (t *TestStatefulset) Cleanup() {
