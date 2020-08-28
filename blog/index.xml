@@ -1,0 +1,61 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AzureDisk CSI Driver – Release Notes</title><link>https://Sakuralbj.github.io/azuredisk-csi-driver/blog/</link><description>Recent content in Release Notes on AzureDisk CSI Driver</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://Sakuralbj.github.io/azuredisk-csi-driver/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: v0.8.0</title><link>https://Sakuralbj.github.io/azuredisk-csi-driver/blog/2020/08/10/v0.8.0/</link><pubDate>Mon, 10 Aug 2020 00:00:00 +0000</pubDate><guid>https://Sakuralbj.github.io/azuredisk-csi-driver/blog/2020/08/10/v0.8.0/</guid><description>
+&lt;p>The v0.8.0 version of AzureDisk CSI Driver.&lt;/p>
+&lt;p>Please see &lt;a href="https://github.com/kubernetes-sigs/azuredisk-csi-driver/releases/tag/v0.8.0">azuredisk&lt;/a> for guidance.&lt;/p>
+&lt;p>Features:&lt;/p>
+&lt;ul>
+&lt;li>support force detach&lt;/li>
+&lt;li>support incremental snapshot&lt;/li>
+&lt;li>support tags in snapshot&lt;/li>
+&lt;/ul>
+&lt;p>Bug Fixes:&lt;/p>
+&lt;ul>
+&lt;li>fix disk API 10s latency issue&lt;/li>
+&lt;li>fix initial delay(1s) when mount azure disk&lt;/li>
+&lt;li>fix incorrect max azure disk max count&lt;/li>
+&lt;/ul></description></item><item><title>Blog: v0.7.0</title><link>https://Sakuralbj.github.io/azuredisk-csi-driver/blog/2020/04/10/v0.7.0/</link><pubDate>Fri, 10 Apr 2020 00:00:00 +0000</pubDate><guid>https://Sakuralbj.github.io/azuredisk-csi-driver/blog/2020/04/10/v0.7.0/</guid><description>
+&lt;p>The v0.7.0 version of AzureDisk CSI Driver.&lt;/p>
+&lt;p>Please see &lt;a href="https://github.com/kubernetes-sigs/azuredisk-csi-driver/releases/tag/v0.7.0">azuredisk&lt;/a> for guidance.&lt;/p>
+&lt;p>Features:&lt;/p>
+&lt;ul>
+&lt;li>windows support(alpha)&lt;/li>
+&lt;li>shared disk support&lt;/li>
+&lt;li>read cloud config from secret&lt;/li>
+&lt;/ul></description></item><item><title>Blog: v0.6.0</title><link>https://Sakuralbj.github.io/azuredisk-csi-driver/blog/2020/02/18/v0.6.0/</link><pubDate>Tue, 18 Feb 2020 00:00:00 +0000</pubDate><guid>https://Sakuralbj.github.io/azuredisk-csi-driver/blog/2020/02/18/v0.6.0/</guid><description>
+&lt;p>The v0.6.0 version of AzureDisk CSI Driver.&lt;/p>
+&lt;p>Please see &lt;a href="https://github.com/kubernetes-sigs/azuredisk-csi-driver/releases/tag/v0.6.0">azuredisk&lt;/a> for guidance.&lt;/p>
+&lt;p>Features:&lt;/p>
+&lt;ul>
+&lt;li>support migration from in-tree driver to CSI driver&lt;/li>
+&lt;li>snapshot beta support&lt;/li>
+&lt;li>MSI support&lt;/li>
+&lt;li>azure disk WriteAccelerator support&lt;/li>
+&lt;/ul></description></item><item><title>Blog: v0.5.0</title><link>https://Sakuralbj.github.io/azuredisk-csi-driver/blog/2020/01/06/v0.5.0/</link><pubDate>Mon, 06 Jan 2020 00:00:00 +0000</pubDate><guid>https://Sakuralbj.github.io/azuredisk-csi-driver/blog/2020/01/06/v0.5.0/</guid><description>
+&lt;p>The beta version of AzureDisk CSI Driver.&lt;/p>
+&lt;p>Please see &lt;a href="https://github.com/kubernetes-sigs/azuredisk-csi-driver/releases/tag/v0.5.0">azuredisk&lt;/a> for guidance.&lt;/p>
+&lt;p>Features:&lt;/p>
+&lt;ul>
+&lt;li>BYOK(SSE+CMK) support&lt;/li>
+&lt;li>topology(availability zone) support&lt;/li>
+&lt;li>volume expansion support&lt;/li>
+&lt;li>volume cloning support&lt;/li>
+&lt;li>enable leader election for controller component(2 replicas by default)&lt;/li>
+&lt;/ul></description></item><item><title>Blog: v0.4.0</title><link>https://Sakuralbj.github.io/azuredisk-csi-driver/blog/2019/10/12/v0.4.0/</link><pubDate>Sat, 12 Oct 2019 00:00:00 +0000</pubDate><guid>https://Sakuralbj.github.io/azuredisk-csi-driver/blog/2019/10/12/v0.4.0/</guid><description>
+&lt;p>The beta version of AzureDisk CSI Driver.&lt;/p>
+&lt;p>Please see &lt;a href="https://github.com/kubernetes-sigs/azuredisk-csi-driver/releases/tag/v0.4.0">azuredisk&lt;/a> for guidance.&lt;/p>
+&lt;p>Features:&lt;/p>
+&lt;ul>
+&lt;li>snapshot support&lt;/li>
+&lt;li>disk partitoin support&lt;/li>
+&lt;li>fix IMDS issue&lt;/li>
+&lt;/ul></description></item><item><title>Blog: v0.3.0</title><link>https://Sakuralbj.github.io/azuredisk-csi-driver/blog/2019/08/06/v0.3.0/</link><pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate><guid>https://Sakuralbj.github.io/azuredisk-csi-driver/blog/2019/08/06/v0.3.0/</guid><description>
+&lt;p>The beta version of AzureDisk CSI Driver.&lt;/p>
+&lt;p>Please see &lt;a href="https://github.com/kubernetes-sigs/azuredisk-csi-driver/releases/tag/v0.3.0">azuredisk&lt;/a> for guidance.&lt;/p>
+&lt;p>Features:&lt;/p>
+&lt;ul>
+&lt;li>switch to CSI 1.1.0&lt;/li>
+&lt;li>switch to use kubernetes-1.15.0 azure cloud provider library&lt;/li>
+&lt;li>fix all sanity test failures&lt;/li>
+&lt;li>add e2e tests&lt;/li>
+&lt;li>add snapshot support&lt;/li>
+&lt;li>add Prometheus metrics support&lt;/li>
+&lt;/ul></description></item></channel></rss>

@@ -1,0 +1,118 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AzureDisk CSI Driver – E2E tests</title><link>https://Sakuralbj.github.io/azuredisk-csi-driver/development/e2e/</link><description>Recent content in E2E tests on AzureDisk CSI Driver</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://Sakuralbj.github.io/azuredisk-csi-driver/development/e2e/index.xml" rel="self" type="application/rss+xml"/><item><title>Development: AzureDisk E2E tests</title><link>https://Sakuralbj.github.io/azuredisk-csi-driver/development/e2e/e2e-tests-azuredisk/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Sakuralbj.github.io/azuredisk-csi-driver/development/e2e/e2e-tests-azuredisk/</guid><description>
+&lt;h3 id="end-to-end-test">End to End Test&lt;/h3>
+&lt;h2 id="run-e2e-tests-locally">Run E2E tests Locally&lt;/h2>
+&lt;h3 id="prerequisite">Prerequisite&lt;/h3>
+&lt;ul>
+&lt;li>Make sure a kubernetes cluster(with version &amp;gt;= 1.13) is set up and kubeconfig is under &lt;code>$HOME/.kube/config&lt;/code>&lt;/li>
+&lt;li>Copy &lt;code>/etc/kubernetes/azure.json&lt;/code> from agent node to local dev machine where you are going to run e2e tests&lt;/li>
+&lt;/ul>
+&lt;h3 id="how-to-run-e2e-tests">How to run E2E tests&lt;/h3>
+&lt;pre>&lt;code class="language-console" data-lang="console"># testing against CSI Driver by default
+make e2e-test
+# Run Windows e2e tests
+export TEST_WINDOWS=&amp;quot;true&amp;quot;
+make e2e-test
+# Run specific e2e tests
+go test -v -timeout=0 ./test/e2e -ginkgo.noColor -ginkgo.v -ginkgo.focus=&amp;quot;deployment&amp;quot;
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>testing against in-tree volume driver&lt;/p>
+&lt;/blockquote>
+&lt;pre>&lt;code class="language-console" data-lang="console">export AZURE_STORAGE_DRIVER=&amp;quot;kubernetes.io/azure-disk&amp;quot;
+make e2e-test
+&lt;/code>&lt;/pre></description></item><item><title>Development: Kubernetes E2E tests</title><link>https://Sakuralbj.github.io/azuredisk-csi-driver/development/e2e/e2e-tests/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Sakuralbj.github.io/azuredisk-csi-driver/development/e2e/e2e-tests/</guid><description>
+&lt;h2 id="prerequisite">Prerequisite&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>An azure service principal&lt;/p>
+&lt;p>Please follow this &lt;a href="https://github.com/Azure/aks-engine/blob/master/docs/topics/service-principals.md">guide&lt;/a> for creating an azure service principal
+The service principal should either have:&lt;/p>
+&lt;ul>
+&lt;li>Contributor permission of a subscription&lt;/li>
+&lt;li>Contributor permission of a resource group. In this case, please create the resource group first&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Docker daemon enabled&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="how-to-run-kubernetes-e2e-tests-locally">How to run Kubernetes e2e tests locally&lt;/h2>
+&lt;ol>
+&lt;li>Prepare dependency project&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="https://github.com/Azure/aks-engine">aks-engine&lt;/a>&lt;/p>
+&lt;p>Binary downloads for the latest version of aks-engine for are available &lt;a href="https://github.com/Azure/aks-engine/releases/latest">on Github&lt;/a>. Download AKS Engine for your operating system, extract the binary and copy it to your &lt;code>$PATH&lt;/code>.&lt;/p>
+&lt;p>On macOS, you can install aks-engine with &lt;a href="https://brew.sh/">Homebrew&lt;/a>. Run the command &lt;code>brew install Azure/aks-engine/aks-engine&lt;/code> to do so. You can install Homebrew following the &lt;a href="https://brew.sh/">instructions&lt;/a>.&lt;/p>
+&lt;p>On Windows, you can install aks-engine via &lt;a href="https://chocolatey.org/">Chocolatey&lt;/a> by executing the command &lt;code>choco install aks-engine&lt;/code>. You can install Chocolatey following the &lt;a href="https://chocolatey.org/install">instructions&lt;/a>.&lt;/p>
+&lt;p>On Linux, it could also be installed by following commands:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ curl -o get-akse.sh https://raw.githubusercontent.com/Azure/aks-engine/master/scripts/get-akse.sh
+$ chmod &lt;span style="color:#0000cf;font-weight:bold">700&lt;/span> get-akse.sh
+$ ./get-akse.sh
+&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://github.com/kubernetes/kubernetes">Kubernetes&lt;/a>&lt;/p>
+&lt;p>This serves as E2E tests case source, it should be located at &lt;code>$GOPATH/src/k8s.io/kubernetes&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">&lt;span style="color:#204a87">cd&lt;/span> &lt;span style="color:#000">$GOPATH&lt;/span>/src
+go get -d k8s.io/kubernetes
+&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://kubectl.docs.kubernetes.io/">kubectl&lt;/a>&lt;/p>
+&lt;p>Kubectl allows you to run command against Kubernetes cluster, which is also used for deploying CSI plugins. You can follow &lt;a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-binary-with-curl">here&lt;/a> to install kubectl. e.g. on Linux&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">curl -LO https://storage.googleapis.com/kubernetes-release/release/&lt;span style="color:#204a87;font-weight:bold">$(&lt;/span>curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt&lt;span style="color:#204a87;font-weight:bold">)&lt;/span>/bin/linux/amd64/kubectl
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;ol start="2">
+&lt;li>
+&lt;p>Build docker image &lt;code>azure-cloud-controller-manager&lt;/code> and push it to your docker image repository.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">git clone https://github.com/kubernetes-sigs/cloud-provider-azure &lt;span style="color:#000">$GOPATH&lt;/span>/src/sigs.k8s.io/cloud-provider-azure
+&lt;span style="color:#204a87">cd&lt;/span> &lt;span style="color:#000">$GOPATH&lt;/span>/src/sigs.k8s.io/cloud-provider-azure
+&lt;span style="color:#204a87">export&lt;/span> &lt;span style="color:#000">IMAGE_REGISTRY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&amp;lt;username&amp;gt;
+&lt;span style="color:#204a87">export&lt;/span> &lt;span style="color:#000">IMAGE_TAG&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&amp;lt;tag&amp;gt;
+make build-images
+make push-images &lt;span style="color:#8f5902;font-style:italic"># or manually `docker push`&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Deploy a Kubernetes cluster with the above &lt;code>azure-cloud-controller-manager&lt;/code> image.&lt;/p>
+&lt;p>To deploy a cluster, export all the required environmental variables first and then invoke &lt;code>make deploy&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">&lt;span style="color:#204a87">export&lt;/span> &lt;span style="color:#000">RESOURCE_GROUP_NAME&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&amp;lt;resource group name&amp;gt;
+&lt;span style="color:#204a87">export&lt;/span> &lt;span style="color:#000">K8S_AZURE_LOCATION&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&amp;lt;location&amp;gt;
+&lt;span style="color:#204a87">export&lt;/span> &lt;span style="color:#000">K8S_AZURE_SUBSID&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&amp;lt;subscription ID&amp;gt;
+&lt;span style="color:#204a87">export&lt;/span> &lt;span style="color:#000">K8S_AZURE_SPID&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&amp;lt;client id&amp;gt;
+&lt;span style="color:#204a87">export&lt;/span> &lt;span style="color:#000">K8S_AZURE_SPSEC&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&amp;lt;client secret&amp;gt;
+&lt;span style="color:#204a87">export&lt;/span> &lt;span style="color:#000">K8S_AZURE_TENANTID&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&amp;lt;tenant id&amp;gt;
+&lt;span style="color:#204a87">export&lt;/span> &lt;span style="color:#000">USE_CSI_DEFAULT_STORAGECLASS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&amp;lt;true/false&amp;gt;
+&lt;span style="color:#204a87">export&lt;/span> &lt;span style="color:#000">K8S_RELEASE_VERSION&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&amp;lt;k8s release version&amp;gt;
+&lt;span style="color:#204a87">export&lt;/span> &lt;span style="color:#000">CCM_IMAGE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&amp;lt;image of the cloud controller manager&amp;gt;
+&lt;span style="color:#204a87">export&lt;/span> &lt;span style="color:#000">CNM_IMAGE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&amp;lt;image of the cloud node manager&amp;gt;
+make deploy
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>To connect the cluster:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">&lt;span style="color:#204a87">export&lt;/span> &lt;span style="color:#000">KUBECONFIG&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">$GOPATH&lt;/span>/src/sigs.k8s.io/cloud-provider-azure/_output/&lt;span style="color:#204a87;font-weight:bold">$(&lt;/span>ls -t _output &lt;span style="color:#000;font-weight:bold">|&lt;/span> head -n 1&lt;span style="color:#204a87;font-weight:bold">)&lt;/span>/kubeconfig/kubeconfig.&lt;span style="color:#000">$LOCATION&lt;/span>.json
+kubectl cluster-info
+&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;p>To check out more of the deployed cluster , replace &lt;code>kubectl cluster-info&lt;/code> with other &lt;code>kubectl&lt;/code> commands. To further debug and diagnose cluster problems, use &lt;code>kubectl cluster-info dump&lt;/code>&lt;/p>
+&lt;ol start="4">
+&lt;li>Get kubetest binary&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">go get -u k8s.io/test-infra/kubetest
+&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
+&lt;li>Run E2E tests&lt;/li>
+&lt;/ol>
+&lt;p>Please first ensure the kubernetes project locates at &lt;code>$GOPATH/src/k8s.io/kubernetes&lt;/code>, the e2e tests will be built from that location.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">&lt;span style="color:#204a87">cd&lt;/span> &lt;span style="color:#000">$GOPATH&lt;/span>/src/k8s.io/kubernetes
+make &lt;span style="color:#000">WHAT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;test/e2e/e2e.test&amp;#39;&lt;/span>
+make &lt;span style="color:#000">WHAT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>cmd/kubectl
+make ginkgo
+&lt;span style="color:#204a87">export&lt;/span> &lt;span style="color:#000">KUBERNETES_PROVIDER&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>azure
+&lt;span style="color:#204a87">export&lt;/span> &lt;span style="color:#000">KUBERNETES_CONFORMANCE_TEST&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>y
+&lt;span style="color:#204a87">export&lt;/span> &lt;span style="color:#000">KUBERNETES_CONFORMANCE_PROVIDER&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>azure
+&lt;span style="color:#204a87">export&lt;/span> &lt;span style="color:#000">CLOUD_CONFIG&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">$GOPATH&lt;/span>/src/sigs.k8s.io/cloud-provider-azure/tests/k8s-azure/manifest/azure.json
+&lt;span style="color:#8f5902;font-style:italic"># some test cases require ssh configurations&lt;/span>
+&lt;span style="color:#204a87">export&lt;/span> &lt;span style="color:#000">KUBE_SSH_KEY_PATH&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>path/to/ssh/privatekey
+&lt;span style="color:#204a87">export&lt;/span> &lt;span style="color:#000">KUBE_SSH_USER&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>ssh_user&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
+&lt;span style="color:#8f5902;font-style:italic"># Replace the test_args with your own.&lt;/span>
+kubetest --test --provider&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">local&lt;/span> --check-version-skew&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">false&lt;/span> --test_args&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;--ginkgo.focus=Port\sforwarding&amp;#39;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
