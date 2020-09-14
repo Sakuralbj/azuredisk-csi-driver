@@ -92,7 +92,7 @@ build_and_push() {
     # NOTE(claudiub): docker buildx works for Windows images as long as it doesn't have to
     # execute RUN commands inside the Windows image.
     docker buildx build --no-cache --pull --push --platform "${os_name}/${arch}" -t "${IMAGE_TAG}-${suffix}" \
-      -f "${dockerfile_name}" ..
+      -f "${dockerfile_name}" .
   done
 }
 
