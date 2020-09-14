@@ -79,9 +79,9 @@ build_and_push() {
 
     echo "Building / pushing image for OS/ARCH: ${os_arch}..."
 
-    dockerfile_name="./pkg/azurediskplugin/Dockerfile"
+    dockerfile_name="Dockerfile"
     if [[ "$os_name" = "windows" ]]; then
-      dockerfile_name="./pkg/azurediskplugin/Windows.Dockerfile"
+      dockerfile_name="Windows.Dockerfile"
     fi
 
     BASEIMAGE=$(getBaseImage "${os_arch}")

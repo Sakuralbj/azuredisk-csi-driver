@@ -165,9 +165,9 @@ export DOCKER_CLI_EXPERIMENTAL=enabled
 
 .PHONY: build-and-push
 build-and-push:
-	bash -x .pkg/azurediskplugin/build.sh build_and_push
+	bash -x ./pkg/azurediskplugin/build.sh build_and_push
 
 .PHONY: manifest
 manifest: build-and-push
-	bash -x .pkg/azurediskplugin/build.sh manifest
+	bash -x ./pkg/azurediskplugin/build.sh manifest
 
