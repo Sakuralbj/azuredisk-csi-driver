@@ -13,7 +13,7 @@
 # limitations under the License.
 
 FROM k8s.gcr.io/build-image/debian-base-amd64:v2.1.3
-COPY ./_output/azurediskplugin /azurediskplugin
+COPY /go/src/sigs.k8s.io/azuredisk-csi-driver/_output/azurediskplugin  /azurediskplugin
 RUN clean-install util-linux e2fsprogs mount ca-certificates udev xfsprogs
 
 LABEL maintainers="andyzhangx"
