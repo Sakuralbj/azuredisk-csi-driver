@@ -154,3 +154,20 @@ clean:
 .PHONY: create-metrics-svc
 create-metrics-svc:
 	kubectl create -f deploy/example/metrics/csi-azuredisk-controller-svc.yaml
+
+REGISTRY ?=sakuralbj
+IMAGE_NAME=csi-driver
+IMAGE_VERSION?=v0.0.13
+IMAGE_TAG=$(REGISTRY)/$(IMAGE_NAME):$(IMAGE_VERSION)
+export
+
+export DOCKER_CLI_EXPERIMENTAL=enabled
+
+.PHONY: build-and-push
+build-and-push:
+	bash -x ./build.sh build_and_push
+
+.PHONY: manifest
+manifest: build-and-push
+	bash -x ./build.sh manifest
+
