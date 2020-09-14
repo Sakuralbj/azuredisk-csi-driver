@@ -19,7 +19,6 @@ REGISTRY_NAME ?= $(shell echo $(REGISTRY) | sed "s/.azurecr.io//g")
 DRIVER_NAME = disk.csi.azure.com
 IMAGE_NAME ?= azuredisk-csi
 IMAGE_VERSION ?= v0.9.0
-IMAGE_TAG=$(REGISTRY)/$(IMAGE_NAME):$(IMAGE_VERSION)
 # Use a custom version for E2E tests if we are testing in CI
 ifdef CI
 ifndef PUBLISH
@@ -44,8 +43,9 @@ GOPATH ?= $(shell go env GOPATH)
 GOBIN ?= $(GOPATH)/bin
 GO111MODULE = off
 DOCKER_CLI_EXPERIMENTAL = enabled
+export
+
 export GOPATH GOBIN GO111MODULE DOCKER_CLI_EXPERIMENTAL
-export DOCKER_CLI_EXPERIMENTAL=enabled
 
 .PHONY: all
 all: azuredisk
@@ -159,7 +159,6 @@ create-metrics-svc:
 
 export
 
-export DOCKER_CLI_EXPERIMENTAL=enabled
 .PHONY: build-and-push
 build-and-push:
 	bash -x build.sh build_and_push
