@@ -157,7 +157,9 @@ clean:
 create-metrics-svc:
 	kubectl create -f deploy/example/metrics/csi-azuredisk-controller-svc.yaml
 
+export
 
+export DOCKER_CLI_EXPERIMENTAL=enabled
 .PHONY: build-and-push
 build-and-push:
 	bash -x build.sh build_and_push
